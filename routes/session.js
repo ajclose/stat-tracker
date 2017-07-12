@@ -6,20 +6,20 @@ router.get('/login', function(req, res) {
   res.render('login')
 })
 
-router.post("/logout", function(req, res) {
-  req.session.destroy(function() {
-    res.redirect("/")
-  })
-})
-
+// router.post("/logout", function(req, res) {
+//   req.session.destroy(function() {
+//     res.redirect("/")
+//   })
+// })
+//
 router.post("/login", function(req,res){
   User.findOne({
     username: req.body.username,
     password: req.body.password
   }).then( function(user){
     if (user){
-      req.session.userId = user._id;
-      res.redirect("/api/activities")
+      // req.session.userId = user._id;
+      res.redirect("/")
     } else {
       res.render("login")
     }

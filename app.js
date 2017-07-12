@@ -8,6 +8,7 @@ const BasicStrategy = require('passport-http').BasicStrategy;
 const registrationRoute = require('./routes/registration')
 const sessionRoute = require('./routes/session')
 const apiRoute = require('./routes/api')
+const homepageRoute = require('./routes/homepage')
 const User = require('./models/User')
 
 app.engine('mustache', mustache())
@@ -38,6 +39,7 @@ app.use(sessionRoute)
 app.use(registrationRoute)
 app.use(passport.authenticate('basic', {session: false}))
 app.use(apiRoute)
+app.use(homepageRoute)
 
 
 app.listen(3000, function() {
