@@ -80,5 +80,14 @@ router.delete('/api/activities/:id', function(req, res) {
   })
 })
 
+router.delete('/api/stats/:id', function(req, res) {
+  Activity.update({$pull: {stats: {_id: req.params.id}}})
+    .then(function(activity) {
+      res.json(activity)
+    })
+  })
+
+
+
 
 module.exports = router
