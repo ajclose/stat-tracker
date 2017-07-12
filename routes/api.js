@@ -14,6 +14,7 @@ router.get("/api/activities", function(req, res) {
 
 router.post("/api/activities", function(req, res) {
   activity = new Activity()
+  console.log(req);
   activity.userId = req.user._id
   activity.title = req.body.activity
   activity.save()
