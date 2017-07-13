@@ -7,4 +7,8 @@ router.get('/', function(req, res) {
   res.render('index')
 })
 
+router.get('/new', function(req, res) {
+  res.render('add')
+})
+
 module.exports = router

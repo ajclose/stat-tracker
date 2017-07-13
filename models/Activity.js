@@ -6,7 +6,7 @@ const activitySchema = new mongoose.Schema({
   title: {type: String, required: true},
   unit: {type: String, required: true},
   stats: [{
-    date: {type: Date, required: true},
+    date: {type: String, required: true},
     data: {type: Number, required: true}
   }]
 })

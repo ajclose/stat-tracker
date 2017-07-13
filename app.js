@@ -3,6 +3,7 @@ const app = express()
 const mustache = require('mustache-express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const moment = require('moment')
 const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
 const registrationRoute = require('./routes/registration')

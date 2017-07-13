@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const moment = require('moment')
 const User = require('../models/User')
 const Activity = require('../models/Activity')
 
@@ -40,7 +41,7 @@ router.get('/api/activities/:id', function(req, res) {
 })
 
 router.post('/api/activities/:id/stats', function(req, res) {
-  const date = new Date()
+  const date = moment(req.body.date).format('MMMM Do YYYY')
   Activity.findOne({
     _id: req.params.id
   })
