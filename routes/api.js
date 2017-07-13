@@ -15,7 +15,6 @@ router.get("/api/activities", function(req, res) {
 
 router.post("/api/activities", function(req, res) {
   activity = new Activity()
-  console.log(req);
   activity.userId = req.user._id
   activity.title = req.body.activity
   activity.unit = req.body.unit
@@ -25,10 +24,6 @@ router.post("/api/activities", function(req, res) {
   }).catch(function(error) {
     res.json(error)
   })
-})
-
-router.get('/add', function(req,res) {
-  res.render('add')
 })
 
 router.get('/api/activities/:id', function(req, res) {
@@ -42,14 +37,25 @@ router.get('/api/activities/:id', function(req, res) {
 
 router.post('/api/activities/:id/stats', function(req, res) {
   const date = moment(req.body.date).format('MMMM Do YYYY')
+  let statExists = false
   Activity.findOne({
     _id: req.params.id
   })
   .then(function(activity) {
-    activity.stats.push({
-      date: date,
-      data: req.body.data
-    })
+    for (var i = 0; i < activity.stats.length; i++) {
+      const stat = activity.stats[i]
+      if (stat.date === date) {
+        stat.data = req.body.data
+        statExists = true
+      }
+    }
+    if (!statExists) {
+      activity.stats.push({
+        date: date,
+        data: req.body.data
+      })
+    }
+
     activity.save()
     .then(function(activity) {
       res.json(activity)
@@ -62,7 +68,8 @@ router.put('/api/activities/:id', function(req, res) {
     _id: req.params.id
   })
   .then(function(activity) {
-    activity.title = req.body.title
+    activity.title = req.body.activity
+    activity.unit = req.body.unit
     activity.save()
     .then(function(activity) {
       res.json(activity)
@@ -83,13 +90,14 @@ router.delete('/api/activities/:id', function(req, res) {
 })
 
 router.delete('/api/stats/:id', function(req, res) {
-  Activity.update({$pull: {stats: {_id: req.params.id}}})
+  const activityId = req.body.activityId
+  Activity.update({_id: activityId}, {$pull: {stats: {_id: req.params.id}}})
     .then(function(activity) {
       res.json(activity)
     })
+    .catch(function(error) {
+      res.json(error)
+    })
   })
-
-
-
 
 module.exports = router
