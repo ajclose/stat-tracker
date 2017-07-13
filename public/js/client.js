@@ -14,7 +14,6 @@ function fetchActivities() {
     const html = `
     <div class="activity" id=${activity._id}>
     <h3>${activity.title}</h3>
-    </a>
     <p>Records: ${activity.stats.length}
     </div>
     `
@@ -43,15 +42,22 @@ function fetchActivity(id) {
     return res.json()
   })
   .then(function(json) {
-    const title = `<h2>${json.title}</h2>`
+    const title = `<h2 class="activity-title">${json.title}</h2>`
     document.querySelector(".activities").insertAdjacentHTML("afterbegin", title)
+    const headers = `
+    <div class="stats-headers">
+    <h3>Date</h3>
+    <h3>${json.unit}</h3>
+    </div>
+    `
+    document.querySelector(".activities").insertAdjacentHTML("beforeend", headers)
     const stats = json.stats
     for (var i = 0; i < stats.length; i++) {
       const stat = stats[i]
       const html = `
       <div class="stats">
       <p class="date">${stat.date}</p>
-      <p class="number">${stat.number}</p>
+      <p class="number">${stat.data}</p>
       </div>
       `
 

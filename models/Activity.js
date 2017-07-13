@@ -4,9 +4,10 @@ mongoose.Promise = require('bluebird')
 const activitySchema = new mongoose.Schema({
   userId: {type: String, required: true},
   title: {type: String, required: true},
+  unit: {type: String, required: true},
   stats: [{
     date: {type: Date, required: true},
-    number: {type: Number, required: true}
+    data: {type: Number, required: true}
   }]
 })
 

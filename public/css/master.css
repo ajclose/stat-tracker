@@ -1,0 +1,57 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.activity {
+  border: 2px solid gray;
+  width: 50%;
+  padding: 30px;
+  margin: 10px;
+  text-align: center;
+}
+
+.activity-title {
+  text-align: center;
+  width: 100%;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border: solid blue;
+}
+
+.stats p {
+  width: 50%;
+  text-align: center;
+  margin: 20px;
+}
+
+.stats-headers {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border: solid red;
+}
+
+.stats-headers h3 {
+  width: 50%;
+  text-align: center;
+  margin: 20px;
+}

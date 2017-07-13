@@ -17,6 +17,7 @@ router.post("/api/activities", function(req, res) {
   console.log(req);
   activity.userId = req.user._id
   activity.title = req.body.activity
+  activity.unit = req.body.unit
   activity.save()
   .then(function(activity) {
     res.redirect("/api/activities")
@@ -46,7 +47,7 @@ router.post('/api/activities/:id/stats', function(req, res) {
   .then(function(activity) {
     activity.stats.push({
       date: date,
-      number: req.body.number
+      data: req.body.data
     })
     activity.save()
     .then(function(activity) {
