@@ -35,9 +35,8 @@ passport.use(new BasicStrategy(
   }
 ));
 
-
-app.use(sessionRoute)
 app.use(registrationRoute)
+app.use(sessionRoute)
 app.use(passport.authenticate('basic', {session: false}))
 app.use(apiRoute)
 app.use(homepageRoute)

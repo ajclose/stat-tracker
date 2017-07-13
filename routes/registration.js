@@ -12,8 +12,7 @@ router.post("/register", function(req, res){
   user.password = req.body.password
   user.email = req.body.email
   user.save()
-  .then(function(user){
-    req.session.userId = user._id
+  .then(function(user) {
     res.redirect("/")
   })
   .catch( function(error){
