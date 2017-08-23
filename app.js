@@ -19,7 +19,8 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 mongoose.Promise = require('bluebird')
-mongoose.connect('mongodb://localhost:27017/stats')
+const mongoURL = process.env.MONGODB_URI || "mongodb://0.0.0.0:27017/stats"
+mongoose.connect(mongoURL)
 
 passport.use(new BasicStrategy(
   function(username, password, done) {
@@ -41,7 +42,7 @@ app.use(passport.authenticate('basic', {session: false}))
 app.use(apiRoute)
 app.use(homepageRoute)
 
-
-app.listen(3000, function() {
+const port = process.env.PORT || 3000
+app.listen(port, function() {
   console.log("app is live!");
 })
